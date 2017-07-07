@@ -1,0 +1,614 @@
+<div id="ConfigMenu" class="container" style="max-width: 200px; float: left; vertical-align: top;"><h2>BioWall Configuration Tool</h2>
+	<p style="text-align: justify;">To select a configuration, toggle between four primary variables, then download CAD details.</p>
+
+	<div id="ConfigSelector" class="container" style="background-color: #b8b8b8; max-width: 200px;">
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<b>Relationship<br>to Plane of<br>Building Wall:</b>
+			</div>
+			<div style="float: left; margin-right: 10px; margin-bottom: 15px;">
+				<input name="configFactorPlane" type="radio" value="R" onclick="selectBiowallConfig()" id="ctCPR"/>Recessed
+				<input checked="checked" name="configFactorPlane" type="radio" value="S" onclick="selectBiowallConfig()"id="ctCPS"/>Surface
+			</div>
+		</div>
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<b>Relationship<br>of Trough<br>to Floor:</b>
+			</div>
+			<div style="float: left; margin-right: 10px; margin-bottom: 15px;">
+				<input name="configFactorFloor" type="radio" value="A" onclick="selectBiowallConfig()" id="ctCFA"/>Above
+				<input name="configFactorFloor" type="radio" value="O" onclick="selectBiowallConfig()" checked="checked" id="ctCFO"/>On
+				<input name="configFactorFloor" type="radio" value="B" onclick="selectBiowallConfig()" id="ctCFB"/>Below
+			</div>
+		</div>
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<a href="#trough"><b>Trough<br>Configuration:</b></a>
+			</div>
+			<div style="float: left; margin-right: 10px;">
+				<input name="configFactorWet" type="radio" value="D" onclick="selectBiowallConfig()" checked="checked" id="ctCWD" />Dry
+				<input name="configFactorWet" type="radio" value="W" onclick="selectBiowallConfig()" id="ctCWW" />Wet
+			</div>
+		</div>
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<a href="#hydraulics"><b>Hydraulics:</b></a>
+			</div>
+			<div style="float: left; margin-right: 15px;">
+				<input checked="checked" name="configFactorHydraulics" type="radio" value="O" onclick="selectBiowallConfig()"id="ctCHO"/>Open
+				<input name="configFactorHydraulics" type="radio" value="C" onclick="selectBiowallConfig()"id="ctCHC"/>Closed
+			</div>
+		</div>
+	</div>
+	&nbsp;
+	<div id="ConfigAlso">
+
+		Also in Configuration:
+		<ul>
+			<li><a href="#trough">Trough treatments</a></li>
+			<li><a href="#geometry" onclick="geoOptions('iconGC')">Curves</a></li>
+			<li><a href="#geometry" onclick="geoOptions('iconGI')">Elevation integration</a></li>
+			<li><a href="#geometry" onclick="geoOptions('iconGU')">Custom configurations</a></li>
+			<li><a href="http://furbishco.com/?p=4639" target="_blank">BioWall Mini</a></li>
+		</ul>
+	</div>
+</div>
+<div id="configImagePane" style="float: left; vertical-align: top; max-width: 550px; margin-left: 10px; margin-right: 10px; margin-bottom: 20px;">
+	<img id="configImage" src="http://furbishco.com/wp-content/uploads/2015/12/SODO.png" alt="" />
+</div>
+<!--Text within configLegendPane is copied from the JSON file that deploys via JS for default option SODO. If editing one, edit the other, but remove 1) \r\n line returns, 2) \ escapes, and 3) start and end quotes...-->
+<div id="configLegendPane" style="float: left; vertical-align: top; max-width: 175px; height:790px;">
+<p style="text-align: left;"><a href="http://furbishco.com/wp-content/uploads/2016/09/BioWall_Standard_Details_SOD.dwg" target="_blank"><img id="Cad" src="http://furbishco.com/wp-content/uploads/2016/10/Living-Wall-AutoCad-Details.png" alt="Living Green Wall Cad details" /></a>  <a href="http://furbishco.com/wp-content/uploads/2016/09/BioWall_Standard_Details_SOD.pdf" target="_blank"> <img id="PDF" style="float: right;" src="http://furbishco.com/wp-content/uploads/2016/10/Living-Green-Wall-Details.png" alt="Living Green Wall construction details" /></a>
+Details for this configuration</p>
+<p style="text-align: justify;"><strong>LEGEND:</strong></p>
+
+<table id="ConfigLegend">
+<tbody>
+<tr>
+<td>C</td>
+<td><a href="http://furbishco.com/biowall-vegetated-wall/controls/#models" target="_blank">Controller</a></td>
+</tr>
+<tr>
+<td>D</td>
+<td><a href="http://furbishco.com/biowall-vegetated-wall/controls/#drain" target="_blank">Drain</a></td>
+</tr>
+<tr>
+<td>E</td>
+<td><a href="http://furbishco.com/biowall-vegetated-wall/controls/#utility" target="_blank">Electrical connection</a></td>
+</tr>
+<tr>
+<td>F</td>
+<td>Floor</td>
+</tr>
+<tr>
+<td>H</td>
+<td><a href="http://furbishco.com/biowall-vegetated-wall/controls/#utility" target="_blank">Water connection</a></td>
+</tr>
+<tr>
+<td>I</td>
+<td><a href="http://furbishco.com/biowall-vegetated-wall/controls/#utility" target="_blank">Internet connection</a></td>
+</tr>
+<tr>
+<td>IH</td>
+<td>Irrigation header</td>
+</tr>
+<tr>
+<td>IS</td>
+<td><a href="http://furbishco.com/biowall-vegetated-wall/controls/#interconnections" target="_blank">Irrigation supply</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td><a href="http://furbishco.com/biowall-vegetated-wall/controls/#interconnections" target="_blank">Low voltage conduit</a></td>
+</tr>
+<tr>
+<td>PE</td>
+<td><a href="#geometry" onclick="geoOptions('iconGE')">Perimeter edging</a></td>
+</tr>
+<tr>
+<td>T</td>
+<td><a href="#trough">Trough</a></td>
+</tr>
+<tr>
+<td>VP</td>
+<td><a href="#geometry" onclick="geoOptions('iconGP')">Vegetated panels</a></td>
+</tr>
+<tr>
+<td>W</td>
+<td>Building Wall</td>
+</tr>
+</tbody>
+</table>
+<!--End copy of text from JSON-->
+
+</div>
+<!--End configLegendPane-->
+
+&nbsp;
+
+<a id="trough"><hr /></a>
+
+&nbsp;
+<h2>Trough Surface Treatments and Materials</h2>
+
+<div style="text-align: center; padding-bottom:10px;">
+	<div id="iconOdiv" style="display: inline-block; width: 100px; cursor: pointer;" onclick="TroughOptions('iconO')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-trough.png" id="iconO" alt="Open living wall trough surface" />
+		<span id="iconOtext" class="troughIconText">Open</span>
+	</div>
+	<div id="iconGdiv" style="display: inline-block; width: 100px; cursor: pointer;" onclick="TroughOptions('iconG')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-grating.png" id="iconG" alt="Grating over green wall trough" />
+		<span id="iconGtext" class="troughIconText">Grating</span>
+	</div>
+	<div id="iconRdiv" style="display: inline-block; width: 100px; cursor: pointer;" onclick="TroughOptions('iconR')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-rock.png" id="iconR" alt="Rocks or pebbles in green wall trough" />
+		<span id="iconRtext" class="troughIconText">Rocks</span>
+	</div>
+	<div id="iconPdiv" style="display: inline-block; width: 100px; cursor: pointer;" onclick="TroughOptions('iconP')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-wall-plant-trough.png" id="iconP" alt="Plants in living wall trough" />
+		<span id="iconPtext" class="troughIconText">Plants</span>
+	</div>
+	<div id="iconCdiv" style="display: inline-block; width: 100px; cursor: pointer;" onclick="TroughOptions('iconC')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/composite-icon.png" id="iconC" alt="Composite material to form living green wall trough" />
+		<span id="iconCtext" class="troughIconText">Composite</span>
+	</div>
+	<div id="iconWdiv" style="display: inline-block; width: 100px; cursor: pointer;" onclick="TroughOptions('iconW')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/waterproofing-icon.png" id="iconW" alt="Waterproofing membrane lining living wall trough or basin or gutter" />
+		<span id="iconWtext" class="troughIconText">Waterproofing</span>
+	</div>
+	<div id="iconSdiv" style="display: inline-block; width: 100px; cursor: pointer;" onclick="TroughOptions('iconS')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/stainless-icon.png" id="iconS" alt="Stainless steel green wall trough" />
+		<span id="iconStext" class="troughIconText">Stainless</span>
+	</div>
+	<div id="iconVdiv" style="display: inline-block; width: 100px; cursor: pointer;" onclick="TroughOptions('iconV')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/Veneers-icon.png" id="iconV" alt="Veneer over living wall trough" />
+		<span id="iconVtext" class="troughIconText">Veneer</span>
+	</div>
+</div>
+
+<div id="TroughGalleryO" class="TroughGallery">
+	[unitegallery troughO]
+</div>
+
+<div id="TroughTreatmentO" class="TroughTreatment" style="float:left;">
+	<div id="TroughImageO" class="TroughImage" style="float:left; padding-top: 10px;">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/green-wall-trough.png" id="TroughTreatmentImageO" alt="Living Green Wall Trough Treatment" />
+	</div>
+	<div id="TroughTreamentSelectorO" class = "TroughTreatmentSelector" style="float: left; padding: 10px; min-height:245px;">
+		<div style="float: left; padding: 10px; background-color: #b8b8b8; height:225px;">
+			<b>Trough<br>Configurations:</b><br>
+			<input id="OD" value="OD" name="TroughImageConfigO" type="radio" onclick="changeTroughImage('D')" checked="checked" />Dry
+			<input id="OW" value="OW" name="TroughImageConfigO" type="radio" onclick="changeTroughImage('W')"/>Wet
+			<b><br>Face Options:</b><br>
+			<input id="OE" value="OE" name="TroughImageVeneerO" type="radio" onclick="changeTroughImage('E')" checked="checked" />Exposed
+			<input id="OV" value="OV" name="TroughImageVeneerO" type="radio" onclick="changeTroughImage('V')"/>Veneer
+		</div>
+		<div id="TroughTextO" class="TroughText" style="float:left; padding-top:10px; padding-left:10px; max-width:490px;">
+			<p style="text-align: justify;">An open trough has no covering; the inner surface is exposed. Often the surface of the trough is not readily visible, as foliage obscures the surface, so no trough covering may be needed. In other cases, a broad, visible stainless steel trough is part of the intended design aesthetic. To specify this, just show the trough as open in details.</p>
+		</div>
+	</div>
+</div>
+
+<div id="TroughGalleryG" class="TroughGallery">
+	[unitegallery troughG]
+</div>
+
+<div id="TroughTreatmentG" class="TroughTreatment" style="float:left;">
+	<div id="TroughImageG" class="TroughImage" style="float:left; padding-top: 10px;">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/green-wall-grating.png" id="TroughTreatmentImageG" alt="Living Green Wall Trough Treatment" />
+	</div>
+	<div id="TroughTreamentSelectorG" class = "TroughTreatmentSelector" style="float: left; padding: 10px; min-height:245px;">
+		<div style="float: left; padding: 10px; background-color: #b8b8b8; height:225px;">
+			<b>Trough<br>Configurations:</b><br>
+			<input id="GD" value="GD" name="TroughImageConfigG" type="radio" onclick="changeTroughImage('D')" checked="checked" />Dry
+			<input id="GW" value="GW" name="TroughImageConfigG" type="radio" onclick="changeTroughImage('W')"/>Wet
+			<b><br>Face Options:</b><br>
+			<input id="GE" value="GE" name="TroughImageVeneerG" type="radio" onclick="changeTroughImage('E')" checked="checked" />Exposed
+			<input id="GV" value="GV" name="TroughImageVeneerG" type="radio" onclick="changeTroughImage('V')"/>Veneer
+		</div>
+		<div id="TroughTextG" class="TroughText" style="float:left; padding-top:10px; padding-left:10px; max-width:490px;">
+			<p style="text-align: justify;">Troughs are available with stainless steel grating. Grating provides a clean, architectural finish to the base of the BioWall. Each grate is made to order, so we can accommodate a wide variety of patterns and finishes, though perforated mill finish is most common. Stainless steel is an ideal, non-reactive material that is easily cleaned and resists corrosion or rust during constant contact with water.  To specify this, use the grating option within the BioWall CAD details, and select the grating option in BioWall specs (pattern can be selected as a construction submittal).</p>
+		</div>
+	</div>
+</div>
+
+<div id="TroughGalleryR" class="TroughGallery">
+	[unitegallery troughR]
+</div>
+
+<div id="TroughTreatmentR" class="TroughTreatment" style="float:left;">
+	<div id="TroughImageR" class="TroughImage" style="float:left; padding-top: 10px;">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/green-wall-rocks.png" id="TroughTreatmentImageR" alt="Living Green Wall Trough Treatment" />
+	</div>
+	<div id="TroughTreamentSelectorP" class = "TroughTreatmentSelector" style="float: left; padding: 10px; min-height:245px;">
+		<div style="float: left; padding: 10px; background-color: #b8b8b8; height:225px;">
+			<b>Trough<br>Configurations:</b><br>
+			<input id="RD" value="RD" name="TroughImageConfigR" type="radio" onclick="changeTroughImage('D')" checked="checked" />Dry
+			<input id="RW" value="RW" name="TroughImageConfigR" type="radio" onclick="changeTroughImage('W')"/>Wet
+			<b><br>Face Options:</b><br>
+			<input id="RE" value="RE" name="TroughImageVeneerR" type="radio" onclick="changeTroughImage('E')" checked="checked" />Exposed
+			<input id="RV" value="RV" name="TroughImageVeneerR" type="radio" onclick="changeTroughImage('V')"/>Veneer
+		</div>
+		<div id="TroughTextP" class="TroughText" style="float:left; padding-top:10px; padding-left:10px; max-width:490px;">
+			<p style="text-align: justify;">Rounded river cobbles, Mexican beach pebbles, or other rocks or stones can be used in or over the trough to provide an attractive, low-maintenance covering. As a natural material, rounded river cobbles provide  an aesthetic reminiscent of a streambed.   Further, rocks can incorporate vegetation selectively or in all areas of the trough. In a dry trough configuration, rocks simply line the bottom of trough. In a wet trough configuration, rocks are usually used over grating. To specify this, use the rock option within the BioWall CAD details, and select the rock option in BioWall specs (rock selection can be made as a construction submittal).</p>
+		</div>
+	</div>
+</div>
+
+<div id="TroughGalleryP" class="TroughGallery">
+	[unitegallery troughP]
+</div>
+
+<div id="TroughTreatmentP" class="TroughTreatment" style="float:left;">
+	<div id="TroughImageP" class="TroughImage" style="float:left; padding-top: 10px;">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/green-living-wall-plant-trough.png" id="TroughTreatmentImageP" alt="Living Green Wall Trough Treatment" />
+	</div>
+	<div id="TroughTreamentSelectorP" class = "TroughTreatmentSelector" style="float: left; padding: 10px; min-height:245px;">
+		<div style="float: left; padding: 10px; background-color: #b8b8b8; height:225px;">
+			<b>Trough<br>Configurations:</b><br>
+			<input id="PD" value="PD" name="TroughImageConfigP" type="radio" onclick="changeTroughImage('D')" checked="checked" />Dry
+			<input id="PW" value="PW" name="TroughImageConfigP" type="radio" onclick="changeTroughImage('W')"/>Wet
+			<b><br>Face Options:</b><br>
+			<input id="PE" value="PE" name="TroughImageVeneerP" type="radio" onclick="changeTroughImage('E')" checked="checked" />Exposed
+			<input id="PV" value="PV" name="TroughImageVeneerP" type="radio" onclick="changeTroughImage('V')"/>Veneer
+		</div>
+		<div id="TroughTextP" class="TroughText" style="float:left; padding-top:10px; padding-left:10px; max-width:490px;">
+			<p style="text-align: justify;">You want a living wall for the plants, so why not consider carrying the plants all the way to the floor!  A wet trough can be planted with a range of containerized aquatic plants, alternately a bryophyte (moss and fern) cover can be used over grating. A dry trough can be planted in a variety of ways, and could possibly extend the vertical BioWall plants into the trough.  To specify this, use the planted trough option within the BioWall CAD details, and select the planted trough option in BioWall specs. Contact us to determine the most appropriate species and planting method for your project, which can be during design or as a construction submittal.</p>
+		</div>
+	</div>
+</div>
+
+<div id="TroughGalleryC" class="TroughGallery">
+	[unitegallery troughC]
+</div>
+
+<div id="TroughTreatmentC" class="TroughTreatment" style="float:left;">
+	<div id="TroughImageC" class="TroughImage" style="float:left; padding-top: 10px;">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/composite.png" id="TroughTreatmentImageC" alt="Living Green Wall Trough Treatment" />
+	</div>
+	<div id="TroughTreamentSelectorC" class = "TroughTreatmentSelector" style="float: left; padding: 10px; min-height:245px;">
+		<div id="TroughTextC" class="TroughText" style="float:left; padding-top:10px; padding-left:10px; max-width:610px;">
+			<p style="text-align: justify;">Composite trough materials include fiberglas and plastics.  Though not common, composite troughs may be the best option for specific projects, as they are lightweight, can be prefabricated but also easily field-welded, can form any shape, and are usually economical. Each BioWall trough is made to order. Composite troughs are typically concealed behind a veneer.  To specify this, select the composite trough option in BioWall specs and contact us for additional project-specific details.</p>
+		</div>
+	</div>
+</div>
+
+<div id="TroughGalleryW" class="TroughGallery">
+	[unitegallery troughW]
+</div>
+
+<div id="TroughTreatmentW" class="TroughTreatment" style="float:left;">
+	<div id="TroughImageW" class="TroughImage" style="float:left; padding-top: 10px;">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/waterproofing.png" id="TroughTreatmentImageW" alt="Living Green Wall Trough Treatment" />
+	</div>
+	<div id="TroughTreamentSelectorW" class = "TroughTreatmentSelector" style="float: left; padding: 10px; min-height:245px;">
+		<div id="TroughTextW" class="TroughText" style="float:left; padding-top:10px; padding-left:10px; max-width:610px;">
+			<p style="text-align: justify;">BioWall troughs are sometimes formed by waterproofing concrete, CMU, or other materials that form the structure of the trough. We use either a single-ply or liquid-applied waterproofing, depending upon substrate, installation, and building conditions. Waterproofing can be applied to any shape.  Contact us for additional project-specific details. To specify this, select the waterproofing trough option in BioWall specs and contact us for additional project-specific details.</p>
+		</div>
+	</div>
+</div>
+
+<div id="TroughGalleryS" class="TroughGallery">
+	[unitegallery troughS]
+</div>
+
+<div id="TroughTreatmentS" class="TroughTreatment" style="float:left;">
+	<div id="TroughImageS" class="TroughImage" style="float:left; padding-top: 10px;">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/stainless.png" id="TroughTreatmentImageS" alt="Living Green Wall Trough Treatment" />
+	</div>
+	<div id="TroughTreamentSelectorS" class = "TroughTreatmentSelector" style="float: left; padding: 10px; min-height:245px;">
+		<div id="TroughTextS" class="TroughText" style="float:left; padding-top:10px; padding-left:10px; max-width:610px;">
+			<p style="text-align: justify;">Most BioWall troughs are fabricated of stainless steel. Stainless steel is an ideal inert material for constant contact with water, it cleans easily, and its finish coordinates well with many other architectural finishes.  Stainless steel troughs are prefabricated based on field dimensions, and once on the jobsite they may be field welded, though we generally advise against field welding for aesthetic and quality control purposes. For these reasons, it is best to plan for no individual segment of a stainless trough to exceed approximately 20 feet in length.  If a multi-segment trough is required, plan for a drain at each segment. </p>
+		</div>
+	</div>
+</div>
+
+<div id="TroughGalleryV" class="TroughGallery">
+	[unitegallery troughV]
+</div>
+
+<div id="TroughTreatmentV" class="TroughTreatment" style="float:left;">
+	<div id="TroughImageV" class="TroughImage" style="float:left; padding-top: 10px;">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/Veneers.png" id="TroughTreatmentImageVV" alt="Living Green Wall Trough Treatment" />
+	</div>
+	<div id="TroughTreamentSelectorV" class = "TroughTreatmentSelector" style="float: left; padding: 10px; min-height:245px;">
+		<div id="TroughTextV" class="TroughText" style="float:left; padding-top:10px; padding-left:10px; max-width:610px;">
+			<p style="text-align: justify;">Any trough may be concealed behind a veneer.  BioWall troughs have been covered with veneers of stone, decorative metal, drywall, wood, and other materials. Veneers are almost always the work of trades other than the living wall installer, and veneers would not be provided by Furbish. We are able to assist in designing details to coordinate your selected veneer with a BioWall.</p>
+		</div>
+	</div>
+</div>
+
+<p style="text-align: justify;">The trough is a watertight catchment at the bottom of the BioWall. The trough catches drips, and in a wet configuration holds water. Surface treatments include open, grating, rocks, and plants. The trough is most commonly stainless steel, but may be fabricated of composites, or a waterproofing membrane.  The trough face may be exposed or covered with a veneer. </p>
+
+<img src="http://furbishco.com/wp-content/uploads/2016/10/Mixed-living-wall-plants.png" alt="Living Green Wall Vegetation" style="padding-top:20px;"/>
+
+<a id="geometry"><hr /></a>
+
+<h2>BioWall Geometry</h2>
+
+<div style="text-align: center; padding-bottom:10px;">
+	<div id="iconGCdiv" style="display: inline-block; width: 170px; cursor: pointer;" onclick="geoOptions('iconGC')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/Curves.gif" id="iconGC" alt="Living green wall curves" />
+		<span id="iconGCtext" class="geometryIconText"><br>Curves</span>
+	</div>
+	<div id="iconGEdiv" style="display: inline-block; width: 170px; cursor: pointer;" onclick="geoOptions('iconGE')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/Edging.gif" id="iconGE" alt="Green wall perimeter edging" />
+		<span id="iconGEtext" class="geometryIconText">Perimeter Edging</span>
+	</div>
+	<div id="iconGIdiv" style="display: inline-block; width: 170px; cursor: pointer;" onclick="geoOptions('iconGI')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/Elevation-Integration.gif" id="iconGI" alt="Living wall integration with other elements" />
+		<span id="iconGItext" class="geometryIconText">Elevation Integration</span>
+	</div>
+	<div id="iconGPdiv" style="display: inline-block; width: 170px; cursor: pointer;" onclick="geoOptions('iconGP')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/Panels.gif" id="iconGP" alt="BioWall panels" />
+		<span id="iconGPtext" class="geometryIconText">Panels</span>
+	</div>
+	<div id="iconGUdiv" style="display: inline-block; width: 170px; cursor: pointer;" onclick="geoOptions('iconGU')" >
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/Custom.gif" id="iconGU" alt="Custom BioWall configuration" />
+		<span id="iconGUtext" class="geometryIconText">Custom Configuration</span>
+	</div>
+</div>
+
+<div id="geoGalleryC" class="geoGallery">
+	[unitegallery geoC]
+</div>
+
+<div id="geoTreatmentC" class="geoTreatment" style="float:left; min-height:200px;">
+	<br>
+	<p style="text-align: justify;">BioWall easily handles curves of any radius. The drawings below should help you visualize different curve BioWall applications.</p>
+	<p style="text-align: justify;">To specify curves, just draw the curves in plan, and leave the rest to us. Contact us for design collaboration.</p>
+	<div id="CurveIcons" style="text-align: center; padding-bottom:10px;">
+		<div id="iconIn" style="display: inline-block; width: 120px; cursor: pointer;" onclick="curveInOutOption()" >
+			<span id="iconIntext"><strong>outside radius</strong></span>
+		</div>
+		<div id="icon50" style="display: inline-block; width: 110px; cursor: pointer;" onclick="curveOptions('icon50')" >
+			<span id="icon50text" class="curveIconText"><strong>50' +/-</strong></span>
+		</div>
+		<div id="icon30" style="display: inline-block; width: 110px; cursor: pointer;" onclick="curveOptions('icon30')" >
+			<span id="icon30text" class="curveIconText"><strong>30' +/-</strong></span>
+		</div>
+		<div id="icon15" style="display: inline-block; width: 110px; cursor: pointer;" onclick="curveOptions('icon15')" >
+			<span id="icon15text" class="curveIconText"><strong>15' +/-</strong></span>
+		</div>
+		<div id="icon10" style="display: inline-block; width: 110px; cursor: pointer;" onclick="curveOptions('icon10')" >
+			<span id="icon10text" class="curveIconText"><strong>10' +/-</strong></span>
+		</div>
+		<div id="icon05" style="display: inline-block; width: 110px; cursor: pointer;" onclick="curveOptions('icon05')" >
+			<span id="icon05text" class="curveIconText"><strong>5' +/-</strong></span>
+		</div>
+		<div id="icon03" style="display: inline-block; width: 110px; cursor: pointer;" onclick="curveOptions('icon03')" >
+			<span id="icon03text" class="curveIconText"><strong>36" +/-</strong></span>
+		</div>
+		<div id="icon01" style="display: inline-block; width: 110px; cursor: pointer;" onclick="curveOptions('icon01')" >
+			<span id="icon01text" class="curveIconText"><strong>18" +/-</strong></span>
+		</div>
+
+</div>
+	<div id="CurveTreatment01in" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-1-in.png" alt="living wall on curve" />
+		<p style="text-align: justify; min-height:40px;">Very tight radii are possible, such as the 18" radius above.  In the example above, ensuring that adequate light reaches the living wall is a greater challenge than constructability. Tighter radii may be possible, but may add cost.  Contact us for details.</p>
+	</div>
+	<div id="CurveTreatment01out" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-1-out.png" alt="radial living wall" />
+		<p style="text-align: justify; min-height:40px;">Very tight radii are possible, such as the 18" radius above. Tighter radii may be possible, but may add cost.  Contact us for details.</p>
+	</div>
+	<div id="CurveTreatment03in" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-3-in.png" alt="green wall around bend" />
+		<p style="text-align: justify; min-height:40px;">In most cases, a "tight" radius might be around 36", as shown above.  Care must be taken to ensure that the inside of the radius receives adequate light.  If a tight turn is desirable, this radius balances drama and constructability.</p>
+	</div>
+	<div id="CurveTreatment03out" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-3-out.png" alt="green wall on curve" />
+		<p style="text-align: justify; min-height:40px;">In most cases, a "tight" radius might be around 36", as shown above.  If a tight turn is desirable, this radius balances drama and constructability.</p>
+	</div>
+	<div id="CurveTreatment05in" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-5-in.png" alt="radial living green wall" />
+		<p style="text-align: justify; min-height:40px;">In many cases, a "tight" radius might be around 5', as shown above.  Care must be taken to ensure that the inside of the radius receives adequate light.  If a tight turn is desirable, this radius balances drama and constructability.</p>
+	</div>
+	<div id="CurveTreatment05out" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-5-out.png" alt="radius green wall" />
+		<p style="text-align: justify; min-height:40px;">In many cases, a "tight" radius might be around 5', as shown above.  If a tight turn is desirable, this radius balances drama and constructability.</p>
+	</div>
+	<div id="CurveTreatment10in" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-10-in.png" alt="curved green living wall" />
+		<p style="text-align: justify;">A gentle 10' radius is about the dividing line between when curved panels versus straight (faceted) panels would be used.  The example above shows curved panels, which we would recommend if using mostly tight-to-the-wall plants such as Philodendron cordatum or Ficus repens.</p>
+		<p style="text-align: justify;">The example below shows faceted panels, which at a 10' radius appears as a 'curve' if using plants that reach at least 12" from the face of the living wall.  Faceted panels are slightly more economical than curved panels.</p>
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-10-in-facet.png" alt="radial vegetated wall" />
+	</div>
+	<div id="CurveTreatment10out" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-10-out.png" alt="living wall on curve" />
+		<p style="text-align: justify; min-height:40px;">A gentle 10' radius is about the dividing line between when curved panels versus straight (faceted) panels would be used.  The example above shows curved panels, which we would recommend if using mostly tight-to-the-wall plants such as Philodendron cordatum or Ficus repens.</p>
+		<p style="text-align: justify; min-height:40px;">The example below shows faceted panels, which at a 10' radius appears as a 'curve' if using plants that reach at least 12" from the face of the living wall.  Faceted panels are slightly more economical than curved panels.</p>
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-10-out-facet.png" alt="living green wall around corner" />
+	</div>
+	<div id="CurveTreatment15in" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-15-in.png" alt="green wall radius" />
+		<p style="text-align: justify; min-height:40px;">A gentle 15' radius would almost always utilize straight (faceted) panels, as shown above.  Vegetation of almost any scale will visually soften the curve.  BioWall panels can also be fabricated to true curves at this scale, if required.</p>
+	</div>
+	<div id="CurveTreatment15out" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-15-out.png" alt="green living wall on radius" />
+		<p style="text-align: justify; min-height:40px;">A gentle 15' radius would almost always utilize straight (faceted) panels, as shown above.  Vegetation of almost any scale will visually soften the curve.  BioWall panels can also be fabricated to true curves at this scale, if required.</p>
+	</div>
+	<div id="CurveTreatment30in" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-30-in.png" alt="curving green vegetated wall" />
+		<p style="text-align: justify; min-height:40px;">Broader radii such as 30' have the most impact on larger living walls, as the curve is barely perceptible on smaller living walls.</p>
+	</div>
+	<div id="CurveTreatment30out" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-30-out.png" alt="green vegetated living wall curves" />
+		<p style="text-align: justify; min-height:40px;">Broader radii such as 30' have the most impact on larger living walls, as the curve is barely perceptible on smaller living walls.</p>
+	</div>
+	<div id="CurveTreatment50in" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-50-in.png" alt="green wall curve" />
+		<p style="text-align: justify; min-height:40px;">Broader radii such as 50' have the most impact on larger living walls, as the curve is barely perceptible on smaller living walls.</p>
+	</div>
+	<div id="CurveTreatment50out" class="CurveTreatment">
+		<img src="http://furbishco.com/wp-content/uploads/2016/11/living-green-wall-curve-50-out.png" alt="living wall curve" />
+		<p style="text-align: justify; min-height:40px;">Broader radii such as 50' have the most impact on larger living walls, as the curve is barely perceptible on smaller living walls.</p>
+	</div>
+</div>
+
+<div id="geoGalleryE" class="geoGallery">
+	[unitegallery geoE]
+</div>
+
+<div id="geoTreatmentE" class="geoTreatment" style="float:left; min-height:200px;">
+	<br>
+	<p style="text-align: justify;">The BioWall is terminated at perimeter edging on all sides except the bottom (which terminates at the trough). Standard BioWall perimeter edging is 1-1/2" x 3" stainless steel with a 1/2" visible bend. Other inert, waterproof materials can be used if needed, though this is not common.  The perimeter edging is visible in surface-mounted configurations, but minimally visible in recessed configurations. </p>
+</div>
+
+<div id="geoGalleryI" class="geoGallery">
+	[unitegallery geoI]
+</div>
+
+<div id="geoTreatmentI" class="geoTreatment" style="float:left; min-height:200px;">
+	<br>
+	<p style="text-align: justify;">Not all BioWalls have a simple, uninterrupted, rectangular elevation. BioWall elevations can incorporate logos, fountains, artwork, and they can go up and over doors, or go under other features. Properly detailed, this elevation integration can be handled easily.</p>
+	<p style="text-align: justify;">If any of these conditions apply to your project, just draw the elevation as you want it, but resist the urge to over-detail and leave the rest to us. Contact us for design collaboration.</p>
+	<p style="text-align: justify;">Download all these details</p>
+</div>
+
+<div id="geoGalleryP" class="geoGallery">
+	[unitegallery geoP]
+</div>
+
+<div id="geoTreatmentP" class="geoTreatment" style="float:left; min-height:200px;">
+	<br>
+	<p style="text-align: justify;">Most BioWalls are pre-grown and panelized. We fabricate panels to project specific dimensions. A typical panel covers approximately 3'x3' to 4'x4'. Panels are approximately 1-1/2" thick, plus the reach of foliage (which is usually about 6" at the time of installation), and panels weigh approximately 2-3 psf when wet. </p>
+</div>
+
+<div id="geoGalleryU" class="geoGallery">
+	[unitegallery geoU]
+</div>
+
+<div id="geoTreatmentU" class="geoTreatment" style="float:left; min-height:200px;">
+	<br>
+	<p style="text-align: justify;">Most of this page addresses common BioWall configurations, but custom configurations are possible. Contact us to design your custom BioWall!</p>
+</div>
+
+&nbsp;
+&nbsp;
+<img src="http://furbishco.com/wp-content/uploads/2016/10/vegetated-wall-plantings.png" alt="green wall plants"/>
+&nbsp;
+
+<div id="specs">
+	<h2>Specifications</h2>
+	<p style="text-align: justify;">Check one item in each group <i>(this will try to remember your selections from farther up the page)</i>, then download your 3-part CSI technical specification.</p>
+	<p style="text-align: justify;">Contact us with any spec questions, including customized specs that include options other than shown here.</p>	
+	<br>
+	<div id="ConfigSelectorSpec" class="container" style="background-color: #b8b8b8; max-width:220px; min-height:330px; margin-right:20px; float:left;">
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<b>Relationship<br>to Plane of<br>Building Wall:</b>
+			</div>
+			<div style="float: left; margin-right: 10px; margin-bottom: 15px;">
+				<input name="specFactorPlane" type="radio" value="R" onclick="selectSpec()" id="spCPR"/>Recessed
+				<input checked="checked" name="specFactorPlane" type="radio" value="S" onclick="selectSpec()" id="spCPS"/>Surface
+			</div>
+		</div>
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<b>Relationship<br>of Trough<br>to Floor:</b>
+			</div>
+			<div style="float: left; margin-right: 10px; margin-bottom: 15px;">
+			<input name="specFactorFloor" type="radio" value="A" onclick="selectSpec()" id="spCFA"/>Above
+				<input name="specFactorFloor" type="radio" value="O" onclick="selectSpec()" checked="checked" id="spCFO"/>On
+				<input name="specFactorFloor" type="radio" value="B" onclick="selectSpec()" id="spCFB"/>Below
+			</div>
+		</div>
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<b>Trough<br>Configuration:</b>
+			</div>
+			<div style="float: left; margin-right: 10px;">
+				<input name="specFactorWet" type="radio" value="D" onclick="selectSpec()" checked="checked" id="spCWD" />Dry
+				<input name="specFactorWet" type="radio" value="W" onclick="selectSpec()" id="spCWW" />Wet
+			</div>
+		</div>
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<b>Hydraulics:</b>
+			</div>
+			<div style="float: left; margin-right: 15px;">
+				<input checked="checked" name="specFactorHydraulics" type="radio" value="O" onclick="selectSpec()" id="spCHO"/>Open
+				<input name="specFactorHydraulics" type="radio" value="C" onclick="selectSpec()" id="spCHC"/>Closed
+			</div>
+		</div>
+	</div>
+	<div id="TroughSelectorSpec" class="container" style="background-color: #b8b8b8; max-width:220px; min-height:330px; margin-right:20px; float:left;">
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<b>Trough<br>Surface<br>Treatment:</b>
+			</div>
+			<div style="float: left; margin-right: 10px; margin-bottom: 15px;">
+				<input checked="checked" name="specFactorSurface" type="radio" value="O" onclick="selectSpec()" id="spSO"/>Open
+				<input name="specFactorSurface" type="radio" value="G" onclick="selectSpec()" id="spSG"/>Grating
+				<input name="specFactorSurface" type="radio" value="R" onclick="selectSpec()" id="spSR"/>Rocks
+				<input name="specFactorSurface" type="radio" value="P" onclick="selectSpec()" id="spSP"/>Plants
+			</div>
+		</div>
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<b>Trough<br>Material:</b>
+			</div>
+			<div style="float: left; margin-right: 10px; margin-bottom: 15px;">
+				<input checked="checked" name="specFactorMaterial" type="radio" value="S" onclick="selectSpec()" id="spMS"/>Stainless
+				<input name="specFactorMaterial" type="radio" value="W" onclick="selectSpec()"id="spMW"/>Waterproofing
+				<input name="specFactorMaterial" type="radio" value="C" onclick="selectSpec()"id="spMC"/>Composite
+			</div>
+		</div>
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<b>Trough<br>Veneer:</b>
+			</div>
+			<div style="float: left; margin-right: 10px;">
+				<input checked="checked" name="specFactorVeneer" type="radio" value="V" onclick="selectSpec()" id="spVV" />Yes
+				<input name="specFactorVeneer" type="radio" value="E" onclick="selectSpec()" id="spVE" />No
+			</div>
+		</div>
+	</div>
+	
+	<div id="GeometrySelectorSpec" class="container" style="background-color: #b8b8b8; max-width:220px; min-height:330px; margin-right:20px; float:left;">
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<b>Curves:</b>
+			</div>
+			<div style="float: left; margin-right: 10px; margin-bottom: 15px;">
+				<input name="specFactorCurve" type="radio" value="C" onclick="selectSpec()" id="spCC" />Yes
+				<input checked="checked" name="specFactorCurve" type="radio" value="S" onclick="selectSpec()" id="spCS" />No
+			</div>
+		</div>
+		<div style="float: left; margin-top: 15px; margin-bottom: 15px; vertical-align: top;">
+			<div style="float: left; width: 90px; margin-left: 15px;">
+				<b>Other<br>Elements<br> Are On Wall:</b>
+			</div>
+			<div style="float: left; margin-right: 10px; margin-bottom: 15px;">
+				<input name="specFactorElement" type="radio" value="I" onclick="selectSpec()" id="spEI" />Yes
+				<input checked="checked" name="specFactorElement" type="radio" value="N" onclick="selectSpec()" id="spEN" />No
+			</div>
+		</div>
+	</div>
+	<div id="DownloadSpecDiv" class="container" style="background-color: #b8b8b8; max-width:220px; min-height:330px; float:right;">
+		<p id="DownloadSpec" style="text-align:justify; margin:15px;"><b>Download your spec! (Coming soon...)</b></p>
+	</div>
+</div>
+
+<br>
+<br>
+<br>
+
+<div>
+	<a id="hydraulics">&nbsp;</a>
+	<img src="http://furbishco.com/wp-content/uploads/2016/11/water3.png" alt="living green wall water usage"/>
+</div>
+
+<div id="hydraulicstext">
+	<br>
+	<h2>Hydraulics</h2>
+		<p style="text-align: justify;"><u><b>Open Loop</b></u></p>
+		<p style="text-align: justify;">This is our standard hydraulic option, which judiciously uses domestic water to irrigate plants, and any excess goes to drain. Though this option does not recirculate, open loop is the more water-miserly option. Read more at our <a href="http://furbishco.com/biowall-vegetated-wall/biowall-design-guide/#FAQ">BioWall FAQ.</a>.</p>
+		<p style="text-align: justify;"><u><b>Closed Loop</b></u></p>
+		<p style="text-align: justify;">Closed Loop is our recirculating option, generally used if a drain if not available.  Recirculation poses a number of challenges that we can avoid by selecting Open Loop.  Our Open Loop hydraulic option uses the least water and maintains the highest level of water quality control.  Read more in our <a href="http://furbishco.com/biowall-vegetated-wall/biowall-design-guide/#FAQ">BioWall FAQ.</a></p>
+</div>
+
+<img src="http://furbishco.com/wp-content/uploads/2016/11/BioWall-living-plants.png" alt="living green wall plants"/>
+
+<hr/>
+<div id="BWDGBottomMenu"></div>

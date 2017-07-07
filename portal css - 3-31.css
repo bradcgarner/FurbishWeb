@@ -1,0 +1,93 @@
+h2{
+text-align: center;
+}
+
+.PortalContainer {
+clear:left;
+}
+
+.TopSection {
+clear:left;
+background-color:#dddddd;
+padding: 7px;
+margin-top:7px;
+margin-bottom:7px;
+
+}
+
+.TopSection:hover {
+color:#AA3F00;
+}
+
+.ContentContainer {
+clear:left;
+}
+
+.Content {
+text-align:center;
+clear:left;
+}
+
+.HelpContent {
+clear:left;
+}
+
+.IconContainer {
+text-align:center;
+background-color:#eeeeee;
+padding:7px;
+}
+
+.IconWrap {
+clear:left;
+text-align:center;
+}
+
+.StackTogether {
+display: inline-block;
+}
+
+.Iconn {
+vertical-align: top;
+width: 114px;
+cursor: pointer;
+}
+
+.UseBrowserArrows {
+vertical-align: top;
+cursor: pointer;
+}
+
+.UseDeviceArrows {
+text-align: center;
+vertical-align: top;
+cursor: pointer;
+}
+
+.HelpTopicArrows {
+text-align: center;
+vertical-align: top;
+cursor: pointer;
+}
+
+.HelpTopicUseDeviceArrows {
+text-align: center;
+vertical-align: top;
+cursor: pointer;
+}
+
+.HelpPlatformUseBrowserArrows {
+text-align: center;
+vertical-align: top;
+cursor: pointer;
+}
+
+.HelpPlatformUseDeviceArrows {
+text-align: center;
+vertical-align: top;
+cursor: pointer;
+}
+
+ul {
+text-align:left;
+}
